@@ -345,6 +345,7 @@ By participating, you give me permission to use your responses in the report.
     {state === 5 && <div className="flex w-full flex-col items-center font-sans dark:bg-black">
       <h1 className="bold pt-4 text-3xl font-semibold pb-4">Colour Psychology: An Experiment</h1>
       <TypewriterText text={`
+          Saving your responses....
           Thank you so much for taking the time to participate!
           I'll be sure to let you know when the results are available.
             `} speed={0.06} rkey="t" />
