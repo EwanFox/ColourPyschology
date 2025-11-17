@@ -3,9 +3,10 @@ import { motion } from "framer-motion";
 type Props = {
   text: string;
   speed?: number; // seconds per letter
+  rkey: string; 
 };
 
-export default function TypewriterText({ text, speed = 0.05 }: Props) {
+export default function TypewriterText({ text, speed = 0.05, rkey }: Props) {
   const lines = text.split("\n");
 
   const container = {
@@ -19,7 +20,7 @@ export default function TypewriterText({ text, speed = 0.05 }: Props) {
   };
 
   return (
-    <motion.div variants={container} initial="hidden" animate="visible">
+    <motion.div variants={container} initial="hidden" animate="visible" className="flex w-full flex-col items-center font-sans dark:bg-black" key={rkey}>
       {lines.map((line, lineIndex) => (
         <div key={lineIndex}>
           {line.split("").map((char, i) => (

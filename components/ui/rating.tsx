@@ -27,7 +27,7 @@ export default function Rating(props: RatingProps) {
         <Button onClick={() => _setSelection(10)} variant={selection == 10 ? 'default' : 'secondary'}>10</Button>
 
     </div>
-    <p className="text-sm float-left">Never seen</p>
+    <p className="text-sm float-left">Never met</p>
     <p className="text-sm float-right">Know very well</p>
     </div>)
 }
