@@ -110,7 +110,7 @@ Additionally, when the results come out, you might learn something about how oth
 
 By participating, you give me permission to use your responses in the report.
 
-            `} speed={0.006} rkey="1" />
+            `} speed={0.01} rkey="1" />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
