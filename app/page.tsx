@@ -73,16 +73,18 @@ export default function Home() {
 
 
   const createResponses = async () => {
-    try {
-      responses.forEach(async response => {
-        console.log(response)
-        const sresponse = await axios.post("/api/response/submit", { respondant_name: personal_results.name, colour: response.colour, subject_id: response.id, familiarity: response.rating });
-        console.log(sresponse)
-      })
+    const createResponses = () => {
+      const promises = responses.map(response =>
+      axios.post("/api/response/submit", {
+        respondant_name: personal_results.name,
+        colour: response.colour,
+        subject_id: response.id,
+        familiarity: response.rating
+    })
+  );
+  Promise.all(promises).catch(err => console.error("Failed to submit!", err));
+};
 
-    } catch (err) {
-      console.log("Failed to submit!")
-    }
   }
 
 
