@@ -73,7 +73,7 @@ export default function Home() {
 
 
   const createResponses = async () => {
-    const createResponses = () => {
+
       const promises = responses.map(response =>
       axios.post("/api/response/submit", {
         respondant_name: personal_results.name,
@@ -83,7 +83,6 @@ export default function Home() {
     })
   );
   Promise.all(promises).catch(err => console.error("Failed to submit!", err));
-};
 
   }
 
