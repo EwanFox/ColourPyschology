@@ -10,12 +10,13 @@ import TypewriterText from "@/components/ui/typewrite";
 import { Button } from "@/components/ui/button";
 import { Sketch } from "@uiw/react-color";
 import Rating from "@/components/ui/rating";
-import { Axis3DIcon } from "lucide-react";
+import { Axis3DIcon, ScatterChart } from "lucide-react";
 import axios from "axios";
 import respondants from "../respondants.json";
 import responses from "../responses.json";
 import Color from 'colorjs.io';
 import { getDeltaE00 } from 'delta-e';
+import ScatterPlot from '@/components/ui/scatter_plot';
 
 
 type Response = {
@@ -49,7 +50,7 @@ function colourAverage(arr: Response[][]) {
     }
   }))
 
-  let averages: { subject: string | undefined, color: string }[] = []
+  let averages: { subject: string | undefined, color: string, subject_id: string| undefined }[] = []
   colour_converted.forEach((r) => {
     let rating_adjust = 0
     let sums = { L: 0, a: 0, b: 0 }
@@ -68,8 +69,8 @@ function colourAverage(arr: Response[][]) {
     final_c.lab.a = sums.a / rating_adjust
     final_c.lab.b = sums.b / rating_adjust
 
-    let name = respondants.respondants.find(n => n.id == r[0]?.subject_id)?.name
-    averages.push({ subject: name, color: final_c.to('lab').toString() })
+    let res = respondants.respondants.find(n => n.id == r[0]?.subject_id);
+    averages.push({ subject: res?.name, color: final_c.to('lab').toString(), subject_id: res?._id })
   })
   return averages.filter((element) => { return (element.subject != undefined) })
 }
@@ -122,21 +123,50 @@ function _distances(respondants: {
   familiarity: string;
   __v: number;
 })[]) {
-  let dist: number[][] = []
-  respondants.forEach((respondant) => {
-    let data = arr.find((e) => e.subject_id === respondant.id)
+  let dist: [number, number][] = []
+  responses.data.forEach((response) => {
+    let data = arr.find((e) => e.subject_id === response.subject_id)
     if (data) {
-      if (data.colour) {
-        let c1 = new Color(respondant.colour);
+      if (data.colour && response.colour) {
+        let c1 = new Color(response.colour);
         let c2 = new Color(data.colour);
         let color1 = { L: c1.lab.L, A: c1.lab.a, B: c1.lab.b }
         let color2 = { L: c2.lab.L, A: c2.lab.a, B: c2.lab.b }
-        dist.push([getDeltaE00(color1, color2), parseInt(data.familiarity)])
+        dist.push([parseInt(data.familiarity),getDeltaE00(color1, color2), ])
       }
     }
   })
   return dist
 }
+
+
+function __distances(respondants: {
+  _id: string;
+  id: string;
+  name: string;
+  colour: string;
+  __v: number;
+}[], arr: {
+    subject: string | undefined;
+    color: string;
+}[]) {
+  let dist: [number, number][] = []
+  responses.data.forEach((response) => {
+    let data = respondants.find((e) => e.id === response.subject_id)
+    if (data) {
+      if (data.colour && response.colour) {
+        let c1 = new Color(response.colour);
+        let c2 = new Color(data.colour);
+        let color1 = { L: c1.lab.L, A: c1.lab.a, B: c1.lab.b }
+        let color2 = { L: c2.lab.L, A: c2.lab.a, B: c2.lab.b }
+        dist.push([parseInt(response.familiarity),getDeltaE00(color1, color2), ])
+      }
+    }
+  })
+  return dist
+}
+
+
 
 export default function Stats() {
 
@@ -153,7 +183,7 @@ export default function Stats() {
   avg_familiarity = avg_familiarity / responses.data.length
 
   let plot_differences = _distances(respondants.respondants, responses.data)
-
+  let other_plot_differences = __distances(respondants.respondants, colours)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -191,7 +221,7 @@ export default function Stats() {
 
       {/* SMALL RESPONSIVE GRID */}
       <div className="grid w-full gap-4 p-4 
-                    grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-16">
+                    grid-cols-3 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-10">
         {colours.map((c) => (
           <div
             className="flex flex-col items-center font-sans gap-1"
@@ -209,7 +239,7 @@ export default function Stats() {
       <h2 className='pt-4 text-2xl'>What colour did you choose for yourself?</h2>
       {/* SMALL RESPONSIVE GRID */}
       <div className="grid w-full gap-4 p-4 
-                    grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-16">
+                    grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10">
         {respondants.respondants.map((c) => (
           <div
             className="flex flex-col items-center font-sans gap-1"
@@ -226,7 +256,7 @@ export default function Stats() {
       </div>
       <h2 className='pt-4 text-2xl'>How far was your colour from what you picked?</h2>
       <div className="grid w-full gap-4 p-4 
-                    grid-cols-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8">
+                    grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         {dists.map((dist) => (
           <div
             className="flex flex-col items-center font-sans gap-1"
@@ -251,6 +281,12 @@ export default function Stats() {
       </div>
       <h2 className='pt-4 text-2xl pb-4'>What was the average familiarity rating?</h2>
       <h3 className='text-xl'>The average score between all recipients was <b>{avg_familiarity.toFixed(2)}</b> out of 10</h3>
+
+
+      <h2 className='pt-4 text-2xl pb-4'>How did familiarity affect voted colour distance?</h2>
+      <ScatterPlot data={plot_differences} width={500} height={500}></ScatterPlot>
+      <h2 className='pt-4 text-2xl pb-4'>How did familarity affect proximity to self-selected colour?</h2>
+      <ScatterPlot data={other_plot_differences} width={500} height={500}></ScatterPlot>
     </div>
   );
 
