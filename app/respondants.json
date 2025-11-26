@@ -1,0 +1,139 @@
+{
+    "message": "Respondants found",
+    "success": true,
+    "respondants": [
+        {
+            "_id": "691a7e2a6599fdc04c174bda",
+            "id": "X86uYjag",
+            "name": "Ewan Fox",
+            "colour": "#9013fe",
+            "__v": 0
+        },
+        {
+            "_id": "691b567c76bcbeef495713f6",
+            "id": "jXVfnvqo",
+            "name": "Henry Ng",
+            "colour": "#1668a0",
+            "__v": 0
+        },
+        {
+            "_id": "691b570c380255ca6dbccbe8",
+            "id": "0iZH0Hpn",
+            "name": "Angela Jao",
+            "colour": "#dfc1ff",
+            "__v": 0
+        },
+        {
+            "_id": "691b603d3f5ab051c5fa5cbb",
+            "id": "IwoJFq7f",
+            "name": "Arjun Kulkarni",
+            "colour": "#ee5449",
+            "__v": 0
+        },
+        {
+            "_id": "691b67af6df6d682cb203fed",
+            "id": "tIDMywcg",
+            "name": "Sunny Yang",
+            "colour": "#d882ec",
+            "__v": 0
+        },
+        {
+            "_id": "691b68166df6d682cb203ff1",
+            "id": "D2qqAc_J",
+            "name": "ATHENA COLLINS (better athena)",
+            "colour": "#50e3c2",
+            "__v": 0
+        },
+        {
+            "_id": "691b68546df6d682cb203ff9",
+            "id": "O6OmFivh",
+            "name": "Mingming",
+            "colour": "#b80727",
+            "__v": 0
+        },
+        {
+            "_id": "691b696b9d6d4ccb8a91b2d3",
+            "id": "0TG4sL6E",
+            "name": "Selene",
+            "colour": "#e27ff1",
+            "__v": 0
+        },
+        {
+            "_id": "691b698f3551c099bfc215d2",
+            "id": "b2mTcBgE",
+            "name": "Susie",
+            "colour": "#80000f",
+            "__v": 0
+        },
+        {
+            "_id": "691b698fd4a49c509d3d2850",
+            "id": "Gvm1bC2w",
+            "name": "Annie Wei",
+            "colour": "#7d628b",
+            "__v": 0
+        },
+        {
+            "_id": "691e0d66ef6112a06dcd08b3",
+            "id": "b1n27Qq4",
+            "name": "Xinyi Liu",
+            "colour": "#afbe6c",
+            "__v": 0
+        },
+        {
+            "_id": "691e0de1ef6112a06dcd08b6",
+            "id": "4Yu-TDYh",
+            "name": "Anastasia",
+            "colour": "#dd7fc4",
+            "__v": 0
+        },
+        {
+            "_id": "691e11b74591799ba86d0f4d",
+            "id": "yOAZCBLK",
+            "name": "Harrison Wang",
+            "colour": "#f8e61b",
+            "__v": 0
+        },
+        {
+            "_id": "691e12b6ad832559119000de",
+            "id": "MUTByErR",
+            "name": "Ms. St George",
+            "colour": "#4a8134",
+            "__v": 0
+        },
+        {
+            "_id": "691e79a53229e621ec172217",
+            "id": "DmI84bWW",
+            "name": "Clare Lin",
+            "colour": "#9dd9db",
+            "__v": 0
+        },
+        {
+            "_id": "691e870e1adec33b30445126",
+            "id": "mRpXhuT0",
+            "name": "Lily Fu",
+            "colour": "#ffaf52",
+            "__v": 0
+        },
+        {
+            "_id": "691e8d24f23e9f183c5f3288",
+            "id": "Qbbivtf_",
+            "name": "Faith",
+            "colour": "#eac3ff",
+            "__v": 0
+        },
+        {
+            "_id": "691f196cecab395758608055",
+            "id": "xodI8p1F",
+            "name": "Andrew Zeng",
+            "colour": "#50e3c2",
+            "__v": 0
+        },
+        {
+            "_id": "691f6a5f5c9d545484bb4e00",
+            "id": "k574hvgS",
+            "name": "Ishaan Grotra ",
+            "colour": "#32a4bd",
+            "__v": 0
+        }
+    ]
+}
